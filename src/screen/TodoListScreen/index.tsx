@@ -1,6 +1,6 @@
 import {Text} from 'react-native';
 
-export default function TodoScreen() {
+export default function () {
   return (
     <>
       <Text>hi</Text>
