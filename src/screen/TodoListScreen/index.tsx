@@ -2,7 +2,7 @@ import React, { Button, FlatList, TextInput, View } from 'react-native';
 import style from './style';
 import { useTheme } from '@react-navigation/native';
 import TodoItem from './component/TodoItem';
-import useTodoListStore from './store';
+import useTodoListStore from '../../store/todo/TodoListStore';
 import TodoItemSeperator from './component/TodoItemSeperator';
 import { useCallback } from 'react';
 import Todo from '../../model/Todo';
