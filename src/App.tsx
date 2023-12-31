@@ -3,14 +3,14 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
 import TodoListScreen from './screen/TodoListScreen';
 
-const Stack = createStackNavigator();
+const RootStack = createStackNavigator();
 
 function App(): React.JSX.Element {
   return (
     <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen name="Todo" component={TodoListScreen} />
-      </Stack.Navigator>
+      <RootStack.Navigator>
+        <RootStack.Screen name="Todo" component={TodoListScreen} />
+      </RootStack.Navigator>
     </NavigationContainer>
   );
 }
