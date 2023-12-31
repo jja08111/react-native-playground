@@ -1,19 +1,21 @@
 import React, { Button, FlatList, TextInput, View } from 'react-native';
 import style from './style';
-import { useNavigation, useTheme } from '@react-navigation/native';
+import { useTheme } from '@react-navigation/native';
 import TodoItem from './component/TodoItem';
 import useTodoListStore from './store';
 import TodoItemSeperator from './component/TodoItemSeperator';
 import { useCallback } from 'react';
 import Todo from '../../model/Todo';
+import { TodoListScreenParamList } from '../../types';
 
-export default function () {
+export default function TodoListScreen({
+  navigation,
+}: TodoListScreenParamList) {
   const theme = useTheme();
   const store = useTodoListStore();
-  const navigation = useNavigation();
 
   const navigateToTodoScreen = useCallback((todo: Todo) => {
-    // TODO: Implement this
+    navigation.navigate('Todo', { todo });
   }, []);
 
   return (
