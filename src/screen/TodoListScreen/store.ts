@@ -1,4 +1,5 @@
 import { create } from 'zustand';
+import { v4 as uuid } from 'uuid';
 import Todo from '../../model/Todo';
 
 const mockTodos: Todo[] = [
@@ -19,7 +20,7 @@ interface TodoListState {
 
 interface TodoListAction {
   readonly updateTodoInput: (content: string) => void;
-  readonly addTodo: (todo: Todo) => void;
+  readonly addTodo: () => void;
 }
 
 const useTodoListStore = create<TodoListState & TodoListAction>()(
@@ -32,8 +33,16 @@ const useTodoListStore = create<TodoListState & TodoListAction>()(
       },
     },
     updateTodoInput: (content) => set(() => ({ todoInput: content })),
-    addTodo: (todo) => {
-      set((state) => ({ todoItems: [...state.todoItems, todo] }));
+    addTodo: () => {
+      const currentState = get();
+      if (!currentState.computed.canAdd) {
+        throw Error('Invalid state exception. The canAdd state is false.');
+      }
+      const todo: Todo = { id: uuid(), content: currentState.todoInput };
+      set((state) => ({
+        todoItems: [...state.todoItems, todo],
+        todoInput: '',
+      }));
     },
   }),
 );

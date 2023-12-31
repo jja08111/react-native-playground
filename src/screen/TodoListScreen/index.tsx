@@ -20,7 +20,11 @@ export default function () {
           onChangeText={store.updateTodoInput}
           placeholder="Typing here..."
         />
-        <Button title="Add" disabled={!store.computed.canAdd} />
+        <Button
+          title="Add"
+          disabled={!store.computed.canAdd}
+          onPress={store.addTodo}
+        />
       </View>
     </View>
   );
