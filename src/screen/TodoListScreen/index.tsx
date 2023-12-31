@@ -1,13 +1,20 @@
 import React, { Button, FlatList, TextInput, View } from 'react-native';
 import style from './style';
-import { useTheme } from '@react-navigation/native';
+import { useNavigation, useTheme } from '@react-navigation/native';
 import TodoItem from './component/TodoItem';
 import useTodoListStore from './store';
 import TodoItemSeperator from './component/TodoItemSeperator';
+import { useCallback } from 'react';
+import Todo from '../../model/Todo';
 
 export default function () {
   const theme = useTheme();
   const store = useTodoListStore();
+  const navigation = useNavigation();
+
+  const navigateToTodoScreen = useCallback((todo: Todo) => {
+    // TODO: Implement this
+  }, []);
 
   return (
     <View>
@@ -17,7 +24,13 @@ export default function () {
         ItemSeparatorComponent={TodoItemSeperator}
         renderItem={(renderItem) => {
           const todo = renderItem.item;
-          return <TodoItem key={todo.id} todo={todo} />;
+          return (
+            <TodoItem
+              key={todo.id}
+              todo={todo}
+              onPress={navigateToTodoScreen}
+            />
+          );
         }}
       />
       <View style={style.inputView}>
