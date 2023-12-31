@@ -1,5 +1,5 @@
 import React, { TouchableOpacity } from 'react-native';
-import { Text, View } from 'react-native';
+import { Text } from 'react-native';
 import Todo from '../../../../model/Todo';
 import style from './style';
 import { useTheme } from '@react-navigation/native';

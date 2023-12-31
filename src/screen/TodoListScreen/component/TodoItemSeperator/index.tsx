@@ -1,6 +1,6 @@
-import { View } from 'react-native';
+import React, { View } from 'react-native';
 import style from './style';
 
 export default function TodoItemSeperator() {
-  return <View style={style.todoItemSeperator}></View>;
+  return <View style={style.todoItemSeperator} />;
 }
