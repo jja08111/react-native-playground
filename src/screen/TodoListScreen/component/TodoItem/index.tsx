@@ -9,7 +9,7 @@ interface Props {
   readonly onPress: (todo: Todo) => void;
 }
 
-export default function (props: Props) {
+export default function TodoItem(props: Props) {
   const theme = useTheme();
   return (
     <TouchableOpacity
