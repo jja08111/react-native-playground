@@ -8,12 +8,9 @@ export type RootStackParamList = {
   };
 };
 
-export type TodoListScreenParamList = NativeStackScreenProps<
-  RootStackParamList,
-  'TodoList'
->;
+type RootStackProps<Screen extends keyof RootStackParamList> =
+  NativeStackScreenProps<RootStackParamList, Screen>;
 
-export type TodoScreenParamList = NativeStackScreenProps<
-  RootStackParamList,
-  'Todo'
->;
+export type TodoListScreenParamList = RootStackProps<'TodoList'>;
+
+export type TodoScreenParamList = RootStackProps<'Todo'>;
