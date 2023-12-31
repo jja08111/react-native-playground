@@ -14,9 +14,12 @@ export default function TodoListScreen({
   const theme = useTheme();
   const store = useTodoListStore();
 
-  const navigateToTodoScreen = useCallback((todo: Todo) => {
-    navigation.navigate('Todo', { todo });
-  }, []);
+  const navigateToTodoScreen = useCallback(
+    (todo: Todo) => {
+      navigation.navigate('Todo', { todo });
+    },
+    [navigation],
+  );
 
   return (
     <View>
