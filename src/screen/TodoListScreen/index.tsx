@@ -1,8 +1,9 @@
-import React, { Button, TextInput, View } from 'react-native';
+import React, { Button, FlatList, TextInput, View } from 'react-native';
 import style from './style';
 import { useTheme } from '@react-navigation/native';
 import TodoItem from './component/TodoItem';
 import useTodoListStore from './store';
+import TodoItemSeperator from './component/TodoItemSeperator';
 
 export default function () {
   const theme = useTheme();
@@ -10,9 +11,15 @@ export default function () {
 
   return (
     <View>
-      {store.todoItems.map((todo) => {
-        return <TodoItem key={todo.id} todo={todo} />;
-      })}
+      <FlatList
+        style={style.todoFlatList}
+        data={store.todoItems}
+        ItemSeparatorComponent={TodoItemSeperator}
+        renderItem={(renderItem) => {
+          const todo = renderItem.item;
+          return <TodoItem key={todo.id} todo={todo} />;
+        }}
+      />
       <View style={style.inputView}>
         <TextInput
           style={[style.textInput, { backgroundColor: theme.colors.card }]}
