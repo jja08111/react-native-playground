@@ -2,17 +2,18 @@ import React, { Button, FlatList, TextInput, View } from 'react-native';
 import style from './style';
 import { useTheme } from '@react-navigation/native';
 import TodoItem from './component/TodoItem';
-import useTodoListStore from '../../store/todo/TodoListStore';
 import TodoItemSeperator from './component/TodoItemSeperator';
 import { useCallback } from 'react';
 import Todo from '../../model/Todo';
 import { TodoListScreenParamList } from '../../types';
+import useTodoListViewModel from './viewModel';
 
 export default function TodoListScreen({
   navigation,
 }: TodoListScreenParamList) {
   const theme = useTheme();
-  const store = useTodoListStore();
+  const viewModel = useTodoListViewModel();
+  const uiState = viewModel.uiState;
 
   const navigateToTodoScreen = useCallback(
     (todo: Todo) => {
@@ -25,7 +26,7 @@ export default function TodoListScreen({
     <View>
       <FlatList
         style={style.todoFlatList}
-        data={store.todoItems}
+        data={uiState.todoItems}
         ItemSeparatorComponent={TodoItemSeperator}
         renderItem={(renderItem) => {
           const todo = renderItem.item;
@@ -41,14 +42,14 @@ export default function TodoListScreen({
       <View style={style.inputView}>
         <TextInput
           style={[style.textInput, { backgroundColor: theme.colors.card }]}
-          value={store.todoInput}
-          onChangeText={store.updateTodoInput}
+          value={uiState.input}
+          onChangeText={viewModel.updateTodoInput}
           placeholder="Typing here..."
         />
         <Button
           title="Add"
-          disabled={!store.computed.canAdd}
-          onPress={store.addTodo}
+          disabled={!viewModel.canAdd}
+          onPress={viewModel.addTodo}
         />
       </View>
     </View>
