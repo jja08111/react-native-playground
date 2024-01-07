@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { v4 as uuid } from 'uuid';
-import useTodoListStore from '../../store/todo/TodoListStore';
+import { useTodoActions, useTodoItems } from '../../store/todo/TodoStore';
 import Todo from '../../model/Todo';
 
 interface TodoListUiState {
@@ -16,9 +16,10 @@ interface TodoListViewModel {
 }
 
 export default function useTodoListViewModel(): TodoListViewModel {
-  const store = useTodoListStore();
+  const todoItems = useTodoItems();
+  const todoActions = useTodoActions();
   const [uiState, setUiState] = useState<TodoListUiState>(() => ({
-    todoItems: store.todoItems,
+    todoItems,
     input: '',
   }));
 
@@ -39,7 +40,7 @@ export default function useTodoListViewModel(): TodoListViewModel {
         throw Error('Invalid state exception. The canAdd state is false.');
       }
       const todo: Todo = { id: uuid(), content: uiState.input };
-      store.addTodo(todo);
+      todoActions.addTodo(todo);
       reduce({
         input: '',
         todoItems: [...uiState.todoItems, todo],
